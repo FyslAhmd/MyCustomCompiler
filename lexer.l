@@ -1,18 +1,22 @@
 %{
 #include "parser.tab.h"
-#include <string.h>
+#include <string.h>   // Include string.h to use strdup
 %}
 
 %%
-[0-9]+      { yylval.num = atoi(yytext); return NUMBER; }
-"print"     { return PRINT; }
-\"[^\"]*\"  { yylval.str = strdup(yytext); return STRING; }
-[+\-]       { return yytext[0]; }
-";"         { return SEMICOLON; }  // Recognize semicolon as SEMICOLON
-[ \t\n]     { }
-.           { return yytext[0]; }
+
+"printf"    { return PRINTF; }
+"("         { return LPAREN; }
+")"         { return RPAREN; }
+";"         { return SEMICOLON; }
+[0-9]+      { yylval.num = atoi(yytext); return NUM; }
+\"[^\"]*\"  { yylval.str = strdup(yytext); return STRING; }  // Capture string literals
+[a-zA-Z_][a-zA-Z0-9_]*  { return IDENTIFIER; }
+
+[ \t\n]      { /* Ignore whitespace */ }
+
 %%
 
-int yywrap(void) {
+int yywrap() {
     return 1;
 }

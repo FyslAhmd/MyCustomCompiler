@@ -39,10 +39,13 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NUMBER = 258,
-     STRING = 259,
-     PRINT = 260,
-     SEMICOLON = 261
+     PRINTF = 258,
+     LPAREN = 259,
+     RPAREN = 260,
+     SEMICOLON = 261,
+     NUM = 262,
+     STRING = 263,
+     IDENTIFIER = 264
    };
 #endif
 
@@ -53,15 +56,15 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 11 "parser.y"
+#line 13 "parser.y"
 
-    int num;   // The `int` type for numbers
-    char *str; // The `char*` type for strings
+    int num;   // Field for integer values
+    char* str; // Field for string literals
 
 
 
 /* Line 1676 of yacc.c  */
-#line 65 "parser.tab.h"
+#line 68 "parser.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

@@ -3,60 +3,47 @@
 #include <stdlib.h>
 #include <string.h>
 
-int yylex(void);  // Defined by Flex
-void yyerror(const char *s);
-int result; // To store the final result
+extern int yylex();   // Declare the yylex function
+
+void yyerror(const char *s) {
+    fprintf(stderr, "Error: %s\n", s);
+}
 %}
 
 %union {
-    int num;   // The `int` type for numbers
-    char *str; // The `char*` type for strings
+    int num;   // Field for integer values
+    char* str; // Field for string literals
 }
 
-%token <num> NUMBER    // NUMBER is of type `int`
-%token <str> STRING
-%token PRINT
-%token SEMICOLON       // Declare the semicolon token
-
-%type <num> expr term
+%token PRINTF LPAREN RPAREN SEMICOLON NUM STRING IDENTIFIER
+%type <num> NUM
+%type <str> STRING
 
 %%
 
 program:
-    | program statement SEMICOLON  // Expect semicolon after statement
+    statements
+    ;
+
+statements:
+    statement
+    | statements statement
     ;
 
 statement:
-    expr                    { printf("Result: %d\n", result); }
-    | PRINT STRING          { printf("%s\n", $2); free($2); }
+    PRINTF LPAREN STRING RPAREN SEMICOLON {
+        printf("%s\n", $3);  // Print the string literal
+        free($3); // Free the memory allocated by strdup
+    }
+    | PRINTF LPAREN NUM RPAREN SEMICOLON {
+        printf("%d\n", $3);  // Print the number
+    }
     ;
 
-expr:
-    expr '+' term           { result = $1 + $3; }
-    | expr '-' term         { result = $1 - $3; }
-    | expr '/' term         { 
-                                  if ($3 == 0) {
-                                      yyerror("Error: Division by zero");
-                                  } else {
-                                      result = $1 / $3; 
-                                  }
-                                }
-    | term                  { result = $1; }
-    | STRING                { printf("%s\n", $1); free($1); }  // Print the string directly
-    ;
-
-term:
-    NUMBER                 { $$ = $1; }
-    ;
-
-%%
-
-void yyerror(const char *s) {
-    fprintf(stderr, "%s\n", s);
-}
+%%  
 
 int main(void) {
-    printf("Enter an expression or a print statement:\n");
-    yyparse();  // Parse the input
+    printf("Enter a C printf statement (e.g., printf(\"Hello World\");):\n");
+    yyparse();
     return 0;
 }

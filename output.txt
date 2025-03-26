@@ -1,7 +1,6 @@
-Enter an expression or a print statement:
-"Hello, World!"
-"World!"
-"Hello, !"
-Result: 7
-Result: 3
-"The result of 5 + 2 is"
+Enter a C printf statement (e.g., printf("Hello World");):
+123
+456
+"Hello Everyone"
+"Hello World"
+109

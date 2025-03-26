@@ -1,6 +1,5 @@
-print "Hello, World!";
-print "World!";
-print "Hello, !";
-5 + 2;
-5 - 2;
-print "The result of 5 + 2 is";
+printf(123);
+printf(456);
+printf("Hello Everyone");
+printf("Hello World");
+printf(109);
