@@ -1,0 +1,7 @@
+Enter an expression or a print statement:
+"Hello, World!"
+"World!"
+"Hello, !"
+Result: 7
+Result: 3
+"The result of 5 + 2 is"
