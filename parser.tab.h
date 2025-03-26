@@ -45,7 +45,8 @@
      SEMICOLON = 261,
      NUM = 262,
      STRING = 263,
-     IDENTIFIER = 264
+     IDENTIFIER = 264,
+     INT = 265
    };
 #endif
 
@@ -56,7 +57,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 13 "parser.y"
+#line 50 "parser.y"
 
     int num;   // Field for integer values
     char* str; // Field for string literals
@@ -64,7 +65,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 68 "parser.tab.h"
+#line 69 "parser.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

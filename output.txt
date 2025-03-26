@@ -1,6 +1,8 @@
-Enter a C printf statement (e.g., printf("Hello World");):
 123
-456
-"Hello Everyone"
 "Hello World"
-109
+20
+15
+5
+11
+5
+50
